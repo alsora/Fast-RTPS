@@ -126,7 +126,7 @@ bool StatelessReader::nextUntakenCache(CacheChange_t** change, WriterProxy** /*w
 bool StatelessReader::nextUnreadCache(CacheChange_t** change,WriterProxy** /*wpout*/)
 {
     std::lock_guard<std::recursive_mutex> guard(*mp_mutex);
-    //m_reader_cache.sortCacheChangesBySeqNum();
+
     bool found = false;
     std::vector<CacheChange_t*>::iterator it;
     //TODO PROTEGER ACCESO A HISTORIA AQUI??? YO CREO QUE NO, YA ESTA EL READER PROTEGIDO

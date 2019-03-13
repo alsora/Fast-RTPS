@@ -30,10 +30,6 @@ namespace rtps {
 
 WriteParams WriteParams::WRITE_PARAM_DEFAULT;
 
-typedef std::pair<InstanceHandle_t,std::vector<CacheChange_t*>> t_pairKeyChanges;
-typedef std::vector<t_pairKeyChanges> t_vectorPairKeyChanges;
-
-
 WriterHistory::WriterHistory(const HistoryAttributes& att):
     History(att),
     mp_writer(nullptr)
