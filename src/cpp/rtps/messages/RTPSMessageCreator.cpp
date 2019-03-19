@@ -78,8 +78,12 @@ bool RTPSMessageCreator::addCustomContent(CDRMessage_t*msg, const octet* content
     return true;
 }
 
-bool RTPSMessageCreator::addSubmessageHeader(CDRMessage_t* msg,
-        octet id,octet flags,uint16_t size) {
+bool RTPSMessageCreator::addSubmessageHeader(
+        CDRMessage_t* msg,
+        octet id,
+        octet flags,
+        uint16_t size)
+{
     CDRMessage::addOctet(msg,id);
     CDRMessage::addOctet(msg,flags);
     CDRMessage::addUInt16(msg, size);
@@ -88,7 +92,10 @@ bool RTPSMessageCreator::addSubmessageHeader(CDRMessage_t* msg,
     return true;
 }
 
-bool RTPSMessageCreator::addSubmessageInfoTS(CDRMessage_t* msg,Time_t& time,bool invalidateFlag)
+bool RTPSMessageCreator::addSubmessageInfoTS(
+        CDRMessage_t* msg,
+        const Time_t &time,
+        bool invalidateFlag)
 {
     octet flags = 0x0;
     uint16_t size = 8;
