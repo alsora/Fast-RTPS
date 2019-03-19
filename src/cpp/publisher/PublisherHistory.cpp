@@ -208,9 +208,13 @@ bool PublisherHistory::removeAllChange(size_t* removed)
             break;
     }
     if(removed!=nullptr)
+    {
         *removed = rem;
+    }
     if (rem>0)
+    {
         return true;
+    }
     return false;
 }
 
