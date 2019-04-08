@@ -188,7 +188,6 @@ protected:
 
     friend class TCPTransportInterface;
     friend class RTCPMessageManager;
-    friend class test_RTCPMessageManager;
 
 private:
     void prepare_send_check_logical_ports_req(uint16_t closedPort);

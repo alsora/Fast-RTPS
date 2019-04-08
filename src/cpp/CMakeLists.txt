@@ -91,7 +91,6 @@ set(${PROJECT_NAME}_source_files
     transport/test_UDPv4Transport.cpp
     transport/tcp/TCPControlMessage.cpp
     transport/tcp/RTCPMessageManager.cpp
-    transport/tcp/test_RTCPMessageManager.cpp
 
     types/AnnotationDescriptor.cpp
     types/AnnotationParameterValue.cpp

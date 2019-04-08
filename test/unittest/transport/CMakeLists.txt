@@ -102,7 +102,6 @@ if(NOT ((MSVC OR MSVC_IDE) AND EPROSIMA_INSTALLER))
             ${PROJECT_SOURCE_DIR}/src/cpp/transport/TCPAcceptor.cpp
             ${PROJECT_SOURCE_DIR}/src/cpp/transport/TCPAcceptorBasic.cpp
             ${PROJECT_SOURCE_DIR}/src/cpp/transport/tcp/RTCPMessageManager.cpp
-            ${PROJECT_SOURCE_DIR}/src/cpp/transport/tcp/test_RTCPMessageManager.cpp
             ${PROJECT_SOURCE_DIR}/src/cpp/transport/tcp/TCPControlMessage.cpp
             ${PROJECT_SOURCE_DIR}/src/cpp/transport/timedevent/CleanTCPSocketsEvent.cpp
             ${PROJECT_SOURCE_DIR}/src/cpp/rtps/network/NetworkFactory.cpp

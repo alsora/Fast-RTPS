@@ -213,7 +213,6 @@ protected:
 
 public:
     friend class RTCPMessageManager;
-    friend class test_RTCPMessageManager;
     friend class CleanTCPSocketsEvent;
 
     virtual ~TCPTransportInterface();
