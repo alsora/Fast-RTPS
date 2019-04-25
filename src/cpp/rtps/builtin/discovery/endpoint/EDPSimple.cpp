@@ -156,7 +156,13 @@ bool EDPSimple::createSEDPEndpoints()
     publications_listener_ = new EDPSimplePUBListener(this);
     subscriptions_listener_ = new EDPSimpleSUBListener(this);
 
-    if(m_discovery.m_simpleEDP.use_PublicationWriterANDSubscriptionReader)
+    std::vector<std::string> names= this->mp_PDP->getRTPSParticipant()->getParticipantNames();
+    std::string this_name = names.front();
+
+    // These first pair of builtin endpoints is required only for nodes that publish data
+    // "arequipa" node does not publish
+    if(this_name != "arequipa")
+    //if(m_discovery.m_simpleEDP.use_PublicationWriterANDSubscriptionReader)
     {
         hatt.initialReservedCaches = edp_initial_reserved_caches;
         hatt.payloadMaxSize = DISCOVERY_PUBLICATION_DATA_MAX_SIZE;
@@ -217,7 +223,10 @@ bool EDPSimple::createSEDPEndpoints()
             subscriptions_reader_.second = nullptr;
         }
     }
-    if(m_discovery.m_simpleEDP.use_PublicationReaderANDSubscriptionWriter)
+    // These second pair of builtin endpoints is required only for nodes that subscribe to data
+    // "montreal" node does not subscribe
+    if(this_name != "montreal")
+    //if(m_discovery.m_simpleEDP.use_PublicationReaderANDSubscriptionWriter)
     {
         hatt.initialReservedCaches = edp_initial_reserved_caches;
         hatt.payloadMaxSize = DISCOVERY_PUBLICATION_DATA_MAX_SIZE;
