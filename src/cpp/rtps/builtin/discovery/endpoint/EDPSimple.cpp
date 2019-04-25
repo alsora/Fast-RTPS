@@ -667,6 +667,51 @@ void EDPSimple::assignRemoteEndpoints(const ParticipantProxyData& pdata)
     uint32_t endp = pdata.m_availableBuiltinEndpoints;
     uint32_t auxendp = endp;
     auxendp &=DISC_BUILTIN_ENDPOINT_PUBLICATION_ANNOUNCER;
+
+    std::vector<std::string> names= this->mp_PDP->getRTPSParticipant()->getParticipantNames();
+
+	std::string this_name = names.front();
+	std::string that_name = pdata.m_participantName;
+
+	std::cout<<"ASSIGN REMOTE ENDPOINTS FROM: "<< that_name << " TO " << this_name <<std::endl;
+
+    std::set<std::pair<std::string, std::string>> whitelist;
+
+    // pairs of nodes that HAVE TO communicate with each other
+    // i.e. montreal publishes to TOPIC_A and lyon subscribes to TOPIC_A
+    whitelist.insert(std::make_pair("montreal", "lyon"));
+    whitelist.insert(std::make_pair("montreal", "hamburg"));
+    whitelist.insert(std::make_pair("montreal", "ponce"));
+    whitelist.insert(std::make_pair("montreal", "mandalay"));
+    whitelist.insert(std::make_pair("montreal", "geneva"));
+    whitelist.insert(std::make_pair("lyon", "hamburg"));
+    whitelist.insert(std::make_pair("hamburg", "osaka"));
+    whitelist.insert(std::make_pair("hamburg", "geneva"));
+    whitelist.insert(std::make_pair("osaka", "mandalay"));
+    whitelist.insert(std::make_pair("mandalay", "ponce"));
+    whitelist.insert(std::make_pair("ponce", "barcelona"));
+    whitelist.insert(std::make_pair("ponce", "geneva"));
+    whitelist.insert(std::make_pair("barcelona", "georgetown"));
+    whitelist.insert(std::make_pair("geneva", "arequipa"));
+    whitelist.insert(std::make_pair("georgetown", "ponce"));
+    whitelist.insert(std::make_pair("lyon", "hamburg"));
+
+    std::set<std::pair<std::string, std::string>> t_list;
+
+    // augment the list with inverse pairs
+    for (auto p : whitelist){
+        t_list.insert(std::make_pair(p.first, p.second));
+        t_list.insert(std::make_pair(p.second, p.first));
+    }
+    whitelist = t_list;
+
+    if (whitelist.find(std::make_pair(this_name, that_name)) == whitelist.end()){
+        std::cout<<"DISCARDED EDP"<<std::endl;
+        return;
+    }
+
+    std::cout<<"APPROVED EDP"<<std::endl;
+
     //FIXME: FIX TO NOT FAIL WITH BAD BUILTIN ENDPOINT SET
     //auxendp = 1;
     if(auxendp!=0 && publications_reader_.first!=nullptr) //Exist Pub Writer and i have pub reader
